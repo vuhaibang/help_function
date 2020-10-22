@@ -1,0 +1,17 @@
+func ParseDateFromString(dateString string) time.Time {
+	slashSource := strings.ReplaceAll(dateString, "-", "/")
+	slashSource = strings.ReplaceAll(slashSource, ".", "/")
+	sourceLayout := []string{
+		"02/01/2006", "2/1/2006", "2006/1/2", "2006", "2/1/06", "06/1/2", "20060102", "200601021504",
+	}
+
+	for i := 0; i < len(sourceLayout); i++ {
+		layout := sourceLayout[i]
+		t, _ := time.Parse(layout, slashSource)
+		if !t.IsZero() {
+			return t
+		}
+	}
+
+	return time.Time{}
+}

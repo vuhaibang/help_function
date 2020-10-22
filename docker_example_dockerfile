@@ -1,0 +1,29 @@
+// Thuc hien tung buoc
+docker run -it centos:latest
+yum update -y
+yum install httpd httpd-tools -y
+yum install vim -y
+yum update -y
+yum install htop -y
+
+docker cp /mycode/myimage/test.html
+        cent:/var/www/html
+
+docker commit cent myimage:v1
+
+// Chuyen doi sang docker file
+FROM centos:latest
+RUN yum update -y
+RUN yum install httpd httpd-tools -y
+RUN yum install vim -y
+RUN yum update -y
+RUN yum install htop -y
+
+WORKDIR /var/www/html
+EXPOSE 80
+ADD ./test.html /var/www/html
+ENTRYPOINT [ "httpd" ]
+CMD ["-D", "FOREGROUND"]
+
+// Chay Dockerfile
+docker build -t myimage:v1 -f Dockerfile .

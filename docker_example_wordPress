@@ -1,0 +1,36 @@
+Step1: Network
+        docker network create --driver bridge wordpress // Tao network "wordpress"
+
+Step2: PHP -9000
+        sudo docker run -d --name c-php -v /docker/wordpress/mycode/:/home/mycode/ --network wordpress php:7.3-fpm
+        // Tao container php co lien ket voi thu muc may host va ket noi voi network vua tao
+        sudo docker exec -it c-php bash    // vao container
+        // Tao thu file php va chay kiem tra
+
+Step3: HTTPD -443, 80
+        sudo docker run --rm -v /docker/wordpress/:/home/mycode httpd cp /usr/local/apache2/conf/httpd.conf /home/mycode/
+        // copy config
+        // bo comment trong mod_proxy.so, mod_proxy_fcgi.so de chay file co duoi php bang php
+        // Them cong de lang nghe proxy o cuoi: AddHandler "proxy:fcgi://c-php:9000" .php
+        // Phan Modeule dir_modeule them index.php de mac dinh mo den file do
+        // Thiet lap thu muc lam viec mac dinh apache: Thay duong dan Document Root "/home/mycode/www/"
+        sudo docker run --network wordpress --name c-http -h httpd -p 9999:80 -p 443:443 -v /docker/wordpress/mycode/:/home/mycode/ -v /docker/wordpress/httpd.conf:/usr/local/apache2/conf/httpd.conf httpd
+
+Step4: MYSQL
+        sudo docker run --rm -v /docker/wordpress/:/home/mycode mysql cp /etc/mysql/my.cnf /home/mycode/ mysql
+        // Sua file config, them dong sau de cac he thong cu co the truy cap duoc: default-authentication-plugin=mysql_native_password
+        sudo docker run -e MYSQL_ROOT_PASSWORD=abc123 -v /docker/wordpress/my.cnf:/etc/mysql/my.cnf -v /docker/wordpress/mycode/db:/var/lib/mysql --name c-mysql --network wordpress mysql
+        sudo docker exec -it c-mysql bash    // Mo bash c-mysql
+        mysql -u root -pabc123              // Truy cap CSDL
+        CREATE USER 'testuser'@'%' IDENTIFIED BY 'testpass';   // Tao user va password dang nhap
+        create database wp_wordpress;  // Tao db
+        GRANT ALL PRIVILEGES ON wp_wordpress.* TO 'testuser'@'%';   // phan quyen
+        flush privileges;       // Cap nhat quyen
+
+Step5: Wordpress
+        Tai ma nguon docker ve va dua vao thu muc cai dat trong HTTPD
+        // Cai them extension ho tro ket noi mysql
+        docker-php-ext-install mysqli
+        docker-php-ext-install pdo_mysql
+        sudo docker restart c-php // Khoi dong lai de cap nhat extentioms
+        apt install iputils-ping // Cai ping trong c-php

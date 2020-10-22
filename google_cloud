@@ -1,0 +1,38 @@
+# ssh
+# Added by Google
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDD4RrBOL/JLoJRuCgZ9axphFAm5Jwb7mxPFju0mRW3xjpZt+lRnv8wr8MAb4iqQAzTMWkjO5fJmEovGTSFTng6n/Q7O1N5v7qMP32MUMh2qtDbnzFGBKhU/b0DCyfMd5IGVCYaKsrfcWO5wvUc4Wr2u8rZEawh5CE3cO4OOy0fmEk2JXi0JWNX2VptJTUQT9QXz1mgKMYQaZKCAWH+GqGUKJJyhncgZg+VfiZITmzKboF7lfzULBuXDibjxkcV3MaAt5TIvR+gUzQv+oRWNN8ev9xO8FvrWGd/EJvPBKag/OXO9zPOT3Xo8k+JTCJGPr0HWyTctR/3NbHVg2DFtmrqKI73h9LN2UkWwfBIg08w0mI+soiQEDVkYvLUzjaAp2Jxd4aK6zrfzNJATV2MLwms6Q6NTEzSKMIRp41liIdxAs23kK171zeIRmbSjunz0aLo1hATRlR+om6jZCzFK/4iUB81B/8gIwkrq0SYZ48fo83oOJ0spWaglmC3iiIBCgM=
+
+# Cài tigetvncserver
+sudo apt-get install tigervnc-standalone-server xinit -y
+sudo apt-get install xfce4 -y
+tigervncserver -localhost no
+
+# Cai awesome
+sudo apt-get install awesome
+hoac cai xfce4
+sudo apt-get install xfce4 -y
+
+# Start VNC server
+tigervncserver -localhost no
+ss -ltnp
+
+# Bat VNC ket noi
+# dong tigervncserver
+pkill 5091
+
+# Cai firefox
+sudo apt-get install firefox-esr
+# Cai gnome
+sudo apt install snapd
+
+# no gui
+# cai dat xvfb
+sudo apt-get install xvfb
+
+# Them vao code
+from pyvirtualdisplay import Display
+display = Display(visible=0, size=(1024, 768))
+display.start()
+
+
+

@@ -1,0 +1,2 @@
+# Rotation display
+xrand --output [name_output] --rotation [left/right/normal]

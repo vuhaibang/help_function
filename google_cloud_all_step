@@ -1,0 +1,58 @@
+# view ytb (test at: 14:25)
+sudo apt update
+sudo fallocate -l 10G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo apt-get install xvfb -y
+sudo apt install python3.8 -y
+git clone https://github.com/vuhaibang/_selenium_
+sudo apt-get install python3-pip -y
+sudo -H pip3 install --upgrade pip
+cd _selenium_
+python3.8 -m pip install -r requirements.txt
+sudo apt-get install chromium-chromedriver -y
+sudo apt-get install firefox-geckodriver -y
+sudo apt-get install firefox -y
+
+
+cd _selenium_
+python3.8 app.py
+
+tmux new-session -d -s ytb -n view
+tmux send-keys -t ytb:view Enter "cd /home/vuhaibangtk/_selenium_" Enter "python3.8 app.py" Enter
+tmux send-keys -t ytb "tmux new-window -n heal_check" Enter
+tmux send-keys -t ytb:heal_check Enter "cd /home/vuhaibangtk/_selenium_" Enter "python3.8 heal_check.py" Enter
+
+
+
+///file-make
+sudo apt update
+sudo fallocate -l 15G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo apt-get install git -y
+sudo apt-get install firefox -y
+sudo apt-get install python3-pip -y
+sudo -H pip3 install --upgrade pip
+sudo apt install python3-opencv -y
+sudo apt-get install imagemagick -y
+sudo apt-get install zip gzip tar -y
+sudo apt-get install tmux -y
+mkdir videos
+git clone https://github.com/vuhaibang/youtube
+cd youtube
+pip3 install -r requirements.txt
+tmux new-session -d -s ytb -n reup
+tmux send-keys -t ytb "tmux new-window -n http" Enter "tmux new-window -n heal_check" Enter "tmux new-window -n view" Enter
+
+cd youtube
+git pull
+cd ..
+tmux send-keys -t ytb:http Enter "cd /home/vuhaibangtk/videos" Enter "python3 -m http.server" Enter
+tmux send-keys -t ytb:heal_check Enter "cd /home/vuhaibangtk/youtube/service" Enter "python3 heal_check.py" Enter
+tmux send-keys -t ytb:reup Enter "cd /home/vuhaibangtk/youtube/service" Enter "python3 main.py" Enter
+
+
+//*[@id="skip-button:h"]/span/button

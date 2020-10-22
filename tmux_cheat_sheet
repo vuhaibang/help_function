@@ -1,0 +1,16 @@
+https://tmuxcheatsheet.com/
+
+# open
+tmux
+
+# open tmux action
+tmux at
+
+# next windows
+crt + b n
+
+# close tmux
+crt + b d
+
+# kill tmux
+tmux kill-session

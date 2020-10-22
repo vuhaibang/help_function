@@ -1,0 +1,7 @@
+# json dump
+	history_js, err := json.Marshal(history)
+	medical.MedicalHistory = string(history_js)
+# json load
+    var medicalHistory []model.MedicalCheckin
+	dec := json.NewDecoder(strings.NewReader(data.MedicalHistory))
+	err := dec.Decode(&medicalHistory)

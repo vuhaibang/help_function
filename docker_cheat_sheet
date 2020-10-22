@@ -1,0 +1,59 @@
+# Search image
+docker search [key]
+
+# Pull image
+docker pull [image:tag]
+
+# Remove image
+docker image rm [image_name]|[image_id]
+
+# Run image
+docker run -it --name [container_name] -h [host] [image:tag]
+
+# Exit terminal not stop container
+ctr + P, ctr + Q
+
+# List container
+docker ps            // container is running
+docker ps -a         // all container
+
+# Save container
+docker commit [container_name]|[container_id] [new_image_name:new_image_version]    // save in docker image
+docker save --output [FILE].tar                                                     // save to file
+
+# Load image
+docker load -i [FILE].tar tag [new_image_name:new_image_version]
+
+# Stop container
+docker stop [container_name]|[container_id] // outside container
+exit                                        // inside container
+
+# Attach container
+docker attach [container_name]|[container_id]
+
+# Remove container
+docker rm [container_name]|[container_id] -f  // -f to remove image is running container
+
+# VAR
+docker run -e BIEN1=VAlUE1 -e BIEN2=VALUE2 [imageID]
+
+# Share folder host with container
+docker run -it -v [pathHost]:[pathContainer] [imageId]       // set share folder with host
+docker run -it --volumes-from [OtherContainer] [imageId]     // set share folder same old container
+
+# DISK docker
+docker volume ls                                                                // check list DISK docker
+docker volume create [name_volume]                                              // create DISK
+docker create --opt device=[pathHOST] --opt type=none --opt o=bind [disk_name]  // create DISK mount with host
+docker volume inspect [name_disk]                                               // check info DISK
+docker run -it --mount source=[name_disk],target=[pathContainer] [imageId]      // set mount container with DISK
+docker run -it -v [name_disk]:[pathContainer] [imageId]                         // set mount container with DISK host
+
+# Network
+docker network ls                                                                   // check list network
+docker network inspect [name_network]                                               // check info network
+docker run -it --name [name_container] -p [host_port]:[container_port] [imageId]    // set network with host
+docker network create --driver bridge [name_new_network]                            // create new network
+docker network rm [name_net_work]                                                   // remove net work
+docker run -it --name [name_container] --network [net_work] [imageId]               // set network for new container
+docker network connect [name_network] [container_id]                                // set network for old container

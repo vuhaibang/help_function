@@ -1,0 +1,42 @@
++ Cau hoi nghe nghiệp
+// Tao bang cau hoi
+
+id occupation level question // questions
+id question_id answer is_true // answers
+id created_at update_at loan_id question_id answer_id time_answer is_true         // loan_questions
+
+// API get question_answer
+
+import (
+  "math/rand"
+  "time"
+)
+
+// ...
+
+rand.Seed(time.Now().Unix()) // initialize global pseudo random generator
+message := fmt.Sprint("Gonna work from home...", r
+
+SELECT * FROM question where occupation = ? and level = ?
+SELECT * FROM ansers where question_id = ?
+
+// input: occupation, level - GET
+// outptut
+question_id
+answer: [{
+id:
+content:
+},
+]
+
+// API POST question_answer - PATCH
+SELECT * FROM answer_id where id = ?
+
+input:
+answer_id, answer_at
+output:
+result: true/false
+
+
+amazon
+3.21.170.91
